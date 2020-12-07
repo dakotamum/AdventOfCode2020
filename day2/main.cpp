@@ -82,6 +82,8 @@ int main(){
     } 
 
     cout << validPasswordCount << endl;
-    
+
+    fin.close(); 
+
     return 0;
 }
