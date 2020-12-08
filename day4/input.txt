@@ -1,0 +1,2 @@
+hcl:#733820
+hgt:166cm eyr:2025 pid:79215921 byr:1952 iyr:2014 ecl:blu
