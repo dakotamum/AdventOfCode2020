@@ -59,6 +59,7 @@ How many individual bags are required inside your single shiny gold bag ?
 Your puzzle answer was 5312.
 */
 
+// NOTE ***********************
 // This code is definitely not the best or cleanest way to do things I'm sure. I could probably consolidate
 // many of my functions together as most of them do very similiar things. I also need to go back sometime
 // and figure out how to clean up the memory. But for the intents and purposes of AOC, it works!
