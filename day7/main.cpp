@@ -1,4 +1,4 @@
-#include <iostream>
+>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -13,7 +13,7 @@ struct Bag {
 bool insertBag(Bag* bagptr, Bag aBag) {
     Bag* tempBag = bagptr;
     bool found = false;
-    cout << "current bag we're looking at: " << tempBag->description << endl;
+    //cout << "current bag we're looking at: " << tempBag->description << endl;
     if (tempBag->children.size() != 0) {
         for (int i = 0; i < tempBag->children.size(); i++) {
             if (insertBag(tempBag->children[i], aBag)) { found = true; }
@@ -30,6 +30,8 @@ bool insertBag(Bag* bagptr, Bag aBag) {
 }
 
 void addBag(vector<Bag>& roots, Bag aBag) {
+    
+
     bool found = false;
     for (int i = 0; i < roots.size(); i++) {
         Bag* bagptr = &roots[i];
@@ -53,13 +55,31 @@ void addBagToGoldContainers(vector<string>& bagsWithGoldBags, string aBag) {
     }
 }
 
-bool searchBags() {
-    
+bool searchBags(Bag* bagptr, vector<string>& bagsWithGoldBags) {
+    Bag* tempBag = bagptr;
+    bool found = false;
+    if (tempBag->children.size() != 0) {
+        for (int i = 0; i < tempBag->children.size(); i++) {
+            if (searchBags(tempBag->children[i], bagsWithGoldBags)){
+                addBagToGoldContainers(bagsWithGoldBags, tempBag->description);
+                found = true;
+            }
+        }
+    }
+    if (tempBag->description == "shiny gold") {
+        return true;
+    }
+    else {
+        return found;
+    }
+
 }
 
 void findNumGoldBags(vector<Bag>& rootBags, vector<string>& bagsWithGoldBags) {
     for (int i = 0; i < rootBags.size(); i++) {
-        if (searchBags()) {
+        Bag* bagptr = &rootBags[i];
+
+        if (searchBags(bagptr, bagsWithGoldBags)) {
             addBagToGoldContainers(bagsWithGoldBags, rootBags[i].description);
         }
     }
@@ -113,9 +133,9 @@ int main() {
 
     vector<string> bagsWithGoldBags = {};
     findNumGoldBags(rootBags, bagsWithGoldBags);
-
-    cout << rootBags[1].description << "->" << rootBags[1].children[0]->description << endl;
-
+    cout << "Number of bags: " << bagsWithGoldBags.size() << endl;
+    //cout << rootBags[1].description << "->" << rootBags[1].children[0]->description << endl;
+    
     fin.close();
     return 0;
 }
