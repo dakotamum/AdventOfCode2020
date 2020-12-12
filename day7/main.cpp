@@ -199,9 +199,7 @@ bool findGold(Bag rootBag, Bag& goldBag) {
             if (findGold(*rootBag.children[i], goldBag)) { found = true; }
         }
     }
-    else {
-        return found;
-    }
+    return found;
 }
 
 int countBagsInGold(Bag* rootBag) {
