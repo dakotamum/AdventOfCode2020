@@ -12,12 +12,13 @@ for line in file:
             break
     sortedAdapters.insert(indexToInsert, int(line))
 
-''' PART A
-print(sortedAdapters)
-
 currentNumberOfInterest = 0
 numberOfDifferencesOfOne = 0
 numberOfDifferencesOfThree = 1
+
+
+currentPossibilities = 1
+
 
 for idx, val in enumerate(sortedAdapters):
     if val - currentNumberOfInterest == 1:
@@ -29,10 +30,33 @@ for idx, val in enumerate(sortedAdapters):
 print("number of differences of one: " + str(numberOfDifferencesOfOne))
 print("number of differences of three: " + str(numberOfDifferencesOfThree))
 print("number of differences of one * number of differences of three = " + str(numberOfDifferencesOfOne * numberOfDifferencesOfThree))
+
+def tribonnacci(someNumber):
+    if someNumber == 0:
+        return 0
+    elif someNumber == 1:
+        return 1
+    elif someNumber == 2:
+        return 1
+    else:
+        return tribonnacci(someNumber - 3) + tribonnacci(someNumber - 2) + tribonnacci(someNumber - 1)
+
+currentNumOfOneDiffs = 0
+sortedAdapters.insert(0, 0)
+
+for i in range(len(sortedAdapters)-1):
+    if sortedAdapters[i+1] - sortedAdapters[i] == 1:
+        currentNumOfOneDiffs += 1
+    elif sortedAdapters[i+1] - sortedAdapters[i] == 3:
+        if currentNumOfOneDiffs > 0:
+            currentPossibilities *= tribonnacci(currentNumOfOneDiffs + 1)
+            currentNumOfOneDiffs = 0
+#print(sortedAdapters)
+
+print(currentPossibilities)
+
+#This was my sort of naive approach to Part B before I realized there was a pattern I could use.
 '''
-
-#Part B
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -78,18 +102,6 @@ print(sortedAdapters)
 
 for value in sortedAdapters:
     root.insert(int(value))
-'''
-root.insert(1)
-root.insert(4)
-root.insert(5)
-root.insert(6)
-root.insert(7)
-root.insert(10)
-root.insert(11)
-root.insert(12)
-root.insert(15)
-root.insert(16)
-root.insert(19)
-'''
 
 root.Printer()
+'''
