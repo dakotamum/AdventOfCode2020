@@ -192,6 +192,8 @@ for i in range(len(sortedAdapters)-1):
 
 print("Number of combination possibilities: " + str(currentPossibilities))
 
+file.close()
+
 #This was my sort of naive approach to Part B before I realized there was a pattern I could use. Ran out of memory when running this:
 '''
 class Node:

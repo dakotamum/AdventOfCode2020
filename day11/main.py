@@ -377,3 +377,5 @@ while madeChange == True:
                 fairyRows[i][j] = fairyRowsTomorrow[i][j]
 
 print("Stable occupied seats: " + str(stableUnoccupiedSeats))
+
+file.close()

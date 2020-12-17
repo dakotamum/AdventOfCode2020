@@ -162,3 +162,5 @@ for iteri, val in enumerate(arrayThatMightAddToBadNumber):
 print("low: " + str(lowBadNumber))
 print("high: " + str(highBadNumber))
 print("low + high = " + str(lowBadNumber + highBadNumber))
+
+file.close()
