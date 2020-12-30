@@ -74,7 +74,7 @@ while currentIteration < 30000000:
     currentIteration += 1
 
 print(currentNumberOfInterest)
-    
+file.close()
 ''' Part A -- way slower than what I did for part A, but it works
 currentIteration = len(indicesOfNumbersAlreadyMentioned)
 lastNumber = 0
