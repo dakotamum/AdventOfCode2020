@@ -1,4 +1,3 @@
-import copy
 file = open("input.txt", "r")
 
 current3DSpace = []
@@ -24,11 +23,12 @@ for z in range(len(current3DSpace)):
 
 new2DList = [['.' for row in range(len(current3DSpace[0]))] for col in range(len(current3DSpace[0][0]))]
 
-current3DSpace.insert(0, new2DList.copy())
-current3DSpace.append(new2DList.copy())
+current3DSpace.insert(0, new2DList)
+current3DSpace.append(new2DList)
 
 # create a copy of the current3DSpace for the next day's 3D space
-next3DSpace = copy.deepcopy(current3DSpace)
+
+next3DSpace = [[['.' for x in range(len(current3DSpace[0]))] for y in range(len(current3DSpace[0]))] for z in range(len(current3DSpace))]
 
 for z in range(len(current3DSpace)):
     for y in range(len(current3DSpace[z])):
@@ -114,21 +114,18 @@ for z in range(len(current3DSpace)):
                     if current3DSpace[z + 1][y + 1][x + 1] == '#':
                         currentActiveNeighbors += 1
 
-            #print(currentActiveNeighbors)
+            print(currentActiveNeighbors)
             if current3DSpace[z][y][x] == '#':
-                if currentActiveNeighbors != 2 or currentActiveNeighbors != 3:
-                    next3DSpace[z][y][x] = '.'
+                if currentActiveNeighbors == 2 or currentActiveNeighbors == 3:
+                    next3DSpace[z][y][x] = '#'
             elif current3DSpace[z][y][x] == '.':
                 if currentActiveNeighbors == 3:
                     next3DSpace[z][y][x] = '#'
 
-
-
-
 # set current 3D space to the next day's 3D space
-#current3DSpace = next3DSpace
+
 for i in range(len(next3DSpace)):
-    for j in range(len(current3DSpace[i])):
+    for j in range(len(next3DSpace[i])):
         print(next3DSpace[i][j])
     print('')
 file.close()
