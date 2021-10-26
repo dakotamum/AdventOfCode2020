@@ -84,11 +84,11 @@ int countTwoDNeighbors(std::vector<std::string> twoD, int i, int j, bool include
 	return count;	
 }
 
-int countThreeDNeighbors(std::vector<std::vector<std::string>> threeD, int i, int j, int k)
+int countThreeDNeighbors(std::vector<std::vector<std::string>> threeD, int i, int j, int k, bool includeCenter=false)
 {
 	int count = 0;
 	if (k-1 >= 0) { count += countTwoDNeighbors(threeD[k-1], i, j); }
-	count += countTwoDNeighbors(threeD[k], i, j, false);	
+	count += countTwoDNeighbors(threeD[k], i, j, includeCenter);	
 	if (k+1 < threeD.size()) { count += countTwoDNeighbors(threeD[k+1], i, j); }
 	return count;
 }
@@ -220,9 +220,11 @@ int countActivesThreeD(std::vector<std::vector<std::string>> threeD)
 int countFourDNeighbors(std::vector<std::vector<std::vector<std::string>>> fourD, int i, int j, int k, int l)
 {
 	int count = 0;
-	if (l-1 >= 0) { count += countThreeDNeighbors(fourD[l-1], i, j, k);}
-	count += countThreeDNeighbors(fourD[l], i, j, k);
-	if (l+1 < fourD.size()) { count += countThreeDNeighbors(fourD[l+1], i, j, k);}
+
+	if (l-1 >= 0) { count += countThreeDNeighbors(fourD[l-1], i, j, k, true);}
+	count += countThreeDNeighbors(fourD[l], i, j, k, false);
+	if (l+1 < fourD.size()) { count += countThreeDNeighbors(fourD[l+1], i, j, k, true);}
+
 	return count;
 }
 
@@ -295,7 +297,11 @@ int main()
 {
 	std::vector<std::vector<std::vector<std::string>>> fourD = initialize4D();
 	newDayFourD(fourD);
-	//expand4D(fourD);
-	print4D(fourD);
+	newDayFourD(fourD);
+	newDayFourD(fourD);
+	newDayFourD(fourD);
+	newDayFourD(fourD);
+	newDayFourD(fourD);
+	std::cout << countActivesFourD(fourD) << std::endl;
 	return 0;
 }
